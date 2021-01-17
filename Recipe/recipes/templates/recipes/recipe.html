@@ -1,0 +1,19 @@
+{% extends "recipes/base.html" %}
+
+{% block content %}
+    {% load static %}
+    <h3><span id="header"></span> <img src="#" height="30" width="30"></h3>
+    <div id="name"></div>
+    <div id="serve"></div>
+    <div id="veg"></div>
+    <br/>
+    <div><strong>Ingredients: </strong></div>
+    <div id="ingredients"><ul></ul></div>
+    <br/>
+    <div><strong>Instructions: </strong></div>
+    <div id="instructions"></div>
+    <br/>
+    <button class="btn btn-danger" onclick="deleteRecipe()">Delete</button>
+    <button class="btn btn-primary" onclick="updateRecipe()">Edit</button>
+    <script src="{% static 'recipes/js/recipe.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "recipes/base.html" %}
+
+{% block content %}
+    {% load static %}
+    <span id="user"></span>
+    <br>
+    <h3>Welcome to Cook House..</h3>
+    <h3>Add your dishes and share with the world..</h3>
+    <script src="{% static 'accounts/js/home.js' %}"></script>
+{% endblock %}

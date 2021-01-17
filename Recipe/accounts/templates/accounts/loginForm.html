@@ -1,0 +1,22 @@
+{% extends "recipes/base.html" %}
+
+{% load widget_tweaks %}
+{% block content %}
+    {% load static %}
+    <h3>Sign In</h3>
+    <form method="GET" novalidate>
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+            <div class="form-group col-lg-4">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field|add_class:'form-control' }}
+                <small class="text-muted">{{ field.help_text }}</small>
+                <p></p>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">login</button>
+    </form>
+    <p></p>
+    <div>Do not have account? <a href="{% url 'register' %}">Register</a> here.</div>
+    <script src="{% static 'accounts/js/loginForm.js' %}"></script>
+{% endblock %}
