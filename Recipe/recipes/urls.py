@@ -6,10 +6,9 @@ router = DefaultRouter(trailing_slash=False)
 router.register('', RecipeAPIView)
 
 urlpatterns = [
-    # api paths
     path('api/', include(router.urls), name="view_recipes"),
-
-    # web-ui paths
+    # path('api', RecipeListViewAPI.as_view(), name='all_recipes'),
+    # path('api/<str:slug>', RecipeRetrieveViewAPI.as_view(), name='each_recipe'),
     path('add-recipe', createRecipe, name='add_recipe'),
     path('update-recipe/<str:slug>', updateRecipe, name='update_recipe'),
     path('', viewRecipes, name='view_recipes'),
