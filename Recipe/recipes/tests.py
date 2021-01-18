@@ -1,10 +1,9 @@
 from rest_framework.test import APITestCase, APIClient, APIRequestFactory
 import requests
-from django.shortcuts import reverse
 
 
 class RecipeTest(APITestCase):
-    recipe_url = reverse("view_recipes")
+    recipe_url = "http://127.0.0.1:8000/recipes/api/"
     login_url = "http://127.0.0.1:8000/accounts/login"
 
     # def getToken(self):
@@ -18,17 +17,21 @@ class RecipeTest(APITestCase):
     #     print(response.json())
 
     # def test_get_all_recipes_without_authorization(self):
-    #     client = APIClient()
-    #     client.credentials()
+    #     self.getToken()
     #     """verify status is 401 when authorization is not provided."""
-    #     response = client.get("/recipes/api/")
+    #     response = self.client.get(self.recipe_url)
     #     self.assertEqual(response.status_code, 401)
 
     def test_get_all_recipes_with_authorization(self):
-        client = APIClient()
-        # client.credentials(HTTP_AUTHORIZATION='Token ' +
-        #                    '6fb160508860ad45f298bcbf821ec3ff89968a8615b540b2b34c5cef109fff12')
-        client.force_authenticate(token=None)
-        response = client.get(
-            "http://127.0.0.1:8000/recipes/api/chicken_tikka")
+        payload = {
+            "username": "mass",
+            "password": "1994"
+        }
+        headers = {
+            'content-type': 'application/json'}
+        response = requests.post(
+            self.login_url, payload, format='json')
+        headers = {
+            'Authorization': 'Token 037af16ae05ce150693a2459f2a2afb01c9fe06861d4bb26da6731b035d8c37a'}
+        response = requests.get(self.recipe_url, headers=headers)
         self.assertEqual(response.status_code, 200)
